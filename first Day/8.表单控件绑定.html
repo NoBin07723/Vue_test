@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>组件</title>
+  <script type="text/javascript" src="lib/js/vue2.js"></script>
+ 
+</head>
+<style type="text/css">
+  .multiline{
+    white-space: pre-line;
+  }
+  .mgl-30{
+    margin-left:30px;
+  }
+</style>
+<body>
+  <div id="box" class="mgl-30">
+    <form>
+      <span>Multiline message is :</span>
+      <p class="multiline">{{ message }}</p>
+      <br>
+      <textarea v-model="message" placeholder="add multiple lines" rows="5" cols="20"  autofocus> </textarea>
+      <br>
+      <label>
+        {{checked}}
+        <input type="checkbox" v-model="checked" value="b">
+      </label>
+      <br>
+      <label>
+        jeck <input type="checkbox" value="jeck" v-model="checknames">
+      </label>
+      <label>
+        rose <input type="checkbox" value="rose" v-model="checknames">
+      </label>
+      <label>
+        bingo <input type="checkbox" value="bingo" v-model="checknames">
+      </label> 
+      <p>{{checknames}}</p>
+      <hr>
+      <h2>单选框按钮</h2>
+      <label>
+        one
+        <input type="radio" value='one' v-model="picked">
+      </label>
+      <br>
+      <label>
+        two
+        <input type="radio" value='two' v-model="picked">
+      </label>
+      <p>{{picked}}</p>
+      <hr>
+      <h2>选择列表</h2>
+      <select v-model='selected'>
+        <option disabled="true" value="">请选择</option>
+        <option>A</option>
+        <option>B</option>
+        <option>C</option>
+      </select>
+      <span>selected: {{selected}}</span>
+
+      <select v-model='multiSelected' multiple style="width:100px">
+        <option disabled="true" value="">请选择</option>
+        <option>A</option>
+        <option>B</option>
+        <option>C</option>
+      </select>
+      <span>selected: {{multiSelected}}</span>
+      <select v-model="forSelected">
+        <option v-for="option in options" v-bind:value="option.value">
+          {{ option.text }}
+        </option>
+      </select>
+      <span>forSelected: {{ forSelected }}</span>
+      <br>
+      <input type="checkbox" v-model="toggle" :true-value="a" :false-value="b">
+      <p>{{toggle}}</p>
+      <input type="radio" v-model="pick" v-bind:value="c">
+    </form>
+  </div>
+</body>
+<script type="text/javascript">
+  var vm = new Vue({
+    el:"#box",
+    data:{
+      message:"",
+      checked:false,
+      checknames:["bingo"],
+      picked:"two",
+      selected:"",
+      multiSelected:["A"],
+      forSelected:'B',
+      toggle:'binbin',
+      a:"binbin",
+      b:"xiaoxiaobin",
+      c:"xiaxia",
+      pick:"xiaxia",
+      options:[
+         { text: 'One', value: 'A' },
+         { text: 'Two', value: 'B' },
+         { text: 'Three', value: 'C' }
+      ]
+    },
+
+  })
+</script>
+</html>

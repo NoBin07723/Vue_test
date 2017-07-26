@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>组件</title>
+  <script type="text/javascript" src="lib/js/vue2.js"></script>
+</head>
+<body>
+  <div id="box">
+   <span >Message:{{msg | capitalize}}</span>
+   <div v-html="data"> </div>
+   <button type="button" :disabled="btnIsDisabled" >点击</button>
+   <form action="www.baidu.com" method="post"  @submit = "onSubmit">
+     <label for="userName">姓名：</label><input type="text" name="userName" id="userName" placeholder="请输入姓名">
+     <input type="submit" name="submit" value="submit">
+   </form>
+  </div> 
+</body>
+<script type="text/javascript">
+  var vm = new Vue({
+    el:"#box",
+    data:{
+      msg:"welcome Vue",
+      data:"彬彬",
+      btnIsDisabled:false
+    },
+    methods:{
+      onSubmit(){
+        alert(0);
+      }
+    },
+    filters:{
+      capitalize(value){
+        if(!value) return "";
+        value = value.toString();
+        return value.charAt(0).toUpperCase() + value.slice(1);
+      }
+    }
+  })
+
+</script>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>组件</title>
+  <script type="text/javascript" src="lib/js/vue2.js"></script>
+ 
+</head>
+<style type="text/css">
+ 
+</style>
+<body>
+  <div id="box">
+  
+  </div>
+</body>
+<script type="text/javascript">
+  Vue.component("todo-item",{
+    template:`
+      <li>
+        {{title}}
+        <button @click='$emit("deleteitem")'>&times;</button>
+      </li>
+    `,
+    props:["title"]
+  });
+  var vm = new Vue({
+    el : "#box",
+    data:{
+      newTodo:"",
+      todoList :[
+        { message: 'Foo',isTrue:true },
+        { message: 'Bar',isTrue:true}
+      ],
+      numbers: [ 1, 2, 3, 4, 5 ]
+    },
+    methods:{
+      addAtodo(){
+        this.todoList.push(this.newTodo);
+        this.newTodo = "";
+      },
+
+    },
+    computed:{
+      evenNumbers: function () {
+        return this.numbers.filter(function (number) {
+          return number % 2 === 0
+        })
+      }
+    }
+  });
+
+ 
+</script>
+</html>

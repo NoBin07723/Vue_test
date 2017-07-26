@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>vue事件</title>
+  <script type="text/javascript" src = "lib/js/vue.js"></script>
+  <script type="text/javascript">
+    window.onload = function(){
+      new Vue({
+        el:"#box",
+        data:{
+          url:
+        }
+        methods:{
+          show:function(ev){
+            alert(ev.keyCode);
+          }
+        }
+      })
+    }
+  </script>
+</head>
+<body>
+  <div id="box">
+    <div >
+      <input type="button" value="click" @click.stop="show($event)">
+    </div>
+    <input type="text" name="" @keydown = "show($event)">
+  </div>
+</body>
+</html>

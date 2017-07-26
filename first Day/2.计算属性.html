@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>组件</title>
+  <script type="text/javascript" src="lib/js/vue2.js"></script>
+</head>
+<body>
+  <div id="box">
+   <span >Message:{{msg.split("").reverse().join("")}}</span>
+   <div>computedMsg: {{reverseStr}} </div>
+   <span>{{now}}</span>
+
+   <h3>computed和watch比较</h3>
+   <label>firstName:<input type="text" name="firstName" v-model="firstName"></label>
+   <label>lastName:<input type="text" name="lastName" v-model="lastName"></label>
+   <label>fullName:<input type="text" name="fullName" v-model="fullName"></label>
+  </div> 
+</body>
+<script type="text/javascript">
+// 计算属性是基于它们的依赖进行缓存的
+// 相对于method方法，效率更加高
+  var vm = new Vue({
+    el : "#box",
+    data : {
+      msg : "binbin",
+      firstName: "bin",
+      lastName : "wu",
+   /*   fullName : "bin wu"*/
+    },
+    computed :{
+      reverseStr(obj){
+        return this.msg.split("").reverse().join("");
+      },
+      now(){
+        return Date.now();
+      },
+
+      /*fullName(){
+        return this.firstName + " " + this.lastName;
+      }*/
+      fullName : {
+        get(){
+          return this.firstName +  " " + this.lastName;
+        },
+        set(newVal){
+          var name = newVal.split(" ");
+          this.firstName = name[0];
+          this.lastName = name[name.length-1];
+        }
+      }
+    },
+    /*watch : {
+      firstName(val){
+        this.fullName = val + this.lastName;
+      },
+      lastName(val){
+        this.fullName =  this.firstName + val;
+      },
+    }*/
+  })
+</script>
+</html>

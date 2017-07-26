@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>组件</title>
+  <script type="text/javascript" src="lib/js/vue2.js"></script>
+ 
+</head>
+<style type="text/css">
+ 
+</style>
+<body>
+  <div id="box">
+      <h1 v-if="ok">Yes</h1>
+      <h1 v-else="ok">no</h1>
+      <div v-if = "Math.random() > 0.5">
+        number langer then 0.5
+      </div>
+      <div v-else>
+        less then 0.5
+      </div>
+  </div> 
+  <template v-if="ok">
+    <h1>Title</h1>
+    <p>Paragraph 1</p>
+    <p>Paragraph 2</p>
+  </template>
+</body>
+<script type="text/javascript">
+  var vm = new Vue({
+    el : "#box",
+    data:{
+      ok:true,
+    },
+
+  })
+</script>
+</html>

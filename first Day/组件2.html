@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>组件</title>
+  <script type="text/javascript" src="lib/js/vue.js"></script>
+</head>
+<body>
+  <div id="box">
+    <aaa></aaa>
+  </div>
+</body>
+<script type="text/javascript">
+  //全局组件
+  var Aaa = Vue.extend({
+    data(){
+      // return  只能retuen 一个对象\
+      return {
+        msg:"welcome"
+      }
+    },
+    template:"<h3 @click='change'>{{msg}}</h3>"
+  });
+  Vue.component()
+  var vm = new Vue({
+    el:"#box",
+    data:{},
+    components:{
+      aaa:Aaa
+    }
+  })
+</script>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>组件</title>
+  <script type="text/javascript" src="lib/js/vue2.js"></script>
+ 
+</head>
+<style type="text/css">
+  .active{
+    color:red;
+    font-weight: 900;
+    font-size:40px;
+  }
+  .textShadow{
+    text-shadow: 2px 2px 4px yellow;
+  }
+</style>
+<body>
+  <div id="box">
+      <div :class ="classObjct" >active</div>
+  </div> 
+</body>
+<script type="text/javascript">
+  var vm = new Vue({
+    el : '#box',
+    data :{
+      classObjct :{
+        active : true,
+        textShadow :true
+      }
+    },
+    methods: {
+     
+    },
+  })
+</script>
+</html>

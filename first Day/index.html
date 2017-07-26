@@ -1,0 +1,134 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>learn about vue  --- first daty</title>
+  <link rel="stylesheet" type="text/css" href="lib/css/bootstrap.min.css">
+  <script type="text/javascript" src = "lib/js/jquery.min.js"></script>
+  <script type="text/javascript" src = "lib/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src = "lib/js/vue.js"></script>
+  <script >
+    // window.onload = function (){
+    //     new Vue ({
+    //         el:'#box',
+    //         data:{
+    //             myData:[],
+    //             username:'',
+    //             age:'',
+    //             nowIndex:-100
+    //         },
+    //         methods:{
+    //           add:function(){
+    //             this.myData.push({
+    //               name:this.username,
+    //               age:this.age
+    //             })
+    //           }
+    //         },
+    //       })
+    // };
+      window.onload=function(){
+            new Vue({
+                el:'#box',
+                data:{
+                    myData:[],
+                    username:'',
+                    age:'',
+                    nowIndex:-100,
+                    confirmTitle:"",
+                },
+                methods:{
+                    add:function(){
+                        this.myData.push({
+                            name:this.username,
+                            age:this.age
+                        });
+
+                        this.username='';
+                        this.age='';
+                    },
+                    changeTitle :function(n){
+                        this.nowIndex = n ;
+                      if(n==-2){
+                        this.confirmTitle = "确认删除全部吗？";
+                      }else{
+                        this.confirmTitle = "确认删除吗？";
+                      }
+                    },
+                    deleteMsg:function(n){
+                        if(n==-2){
+                            this.myData=[];
+                            console.log(this.confirmTitle);
+                        }else{
+                            this.myData.splice(n,1);
+                        }
+                    }
+                }
+            });
+        };
+  </script>
+</head>
+<body>
+  <div class="container" id="box">
+    <form role="form">
+       <div class="form-group">
+        <label for="username">姓名：</label>
+        <input type="text" v-model="username" id ="username" class="form-control" placeholder="请输入姓名">
+      </div>
+      <div class="form-group">
+        <label for="age">年龄</label>
+        <input type="text" id ="age" v-model="age" class="form-control" placeholder="请输入年龄">
+      </div>
+      <br>  
+      <div class="form-group">
+        <input type="button" value="添加" @click="add()" class="btn btn-primary">
+        <input type="reset" value="重置" class="btn btn-danger">
+      </div>
+    </form>
+    <hr>
+    <table class="table table-hover"> 
+       <caption class="h2 text-info text-center" >用户信息表</caption>
+      <tr >
+        <th class="text-center">序号</th>
+        <th class="text-center"> 姓名</th>
+        <th class="text-center">年龄</th>
+        <th class="text-center">操作</th>
+      </tr>
+      <tr class="text-center" v-for="item in myData">
+          <td>{{$index+1}}</td>
+          <td>{{item.name}}</td>
+          <td>{{item.age}}</td> 
+          <td>
+              <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#confirm" @click="changeTitle($index)">删除</button>
+          </td>
+      </tr>
+      <tr v-show="myData.length != 0">
+        <td colspan="4" class="text-right"> 
+          <button class="btn btn-sm btn-danger"  data-toggle="modal" data-target="#confirm"  @click="changeTitle(-2)">删除全部</button>
+        </td> 
+      </tr>
+      <tr v-show="myData.length == 0">
+        <td colspan="4" class="text-center text-muted" > 
+          <p >暂无数据</p>
+        </td> 
+      </tr>
+    </table>
+    <div role="dialog" class="modal fade" id= "confirm">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button class="close" data-dismiss="modal">
+              <span >&times;</span>
+            </button>   
+            <h3 class="modal-title">{{confirmTitle}}</h3>
+          </div>
+          <div class="modal-body text-right">
+            <button class="btn btn-sm btn-primary"  data-dismiss="modal">取消</button>
+            <button class="btn btn-sm btn-danger" data-dismiss="modal" @click="deleteMsg(nowIndex)">确认</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

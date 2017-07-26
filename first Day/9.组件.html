@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>组件</title>
+  <script type="text/javascript" src="lib/js/vue2.js"></script>
+ 
+</head>
+<style type="text/css">
+ 
+</style>
+<body>
+  <div id="box">
+    <my-component-one  :name="binbin"></my-component-one> 
+    <my-component-two></my-component-two>
+    <div>{{total}}</div>
+    <button-counter @addnumber="addTotal"></button-counter>
+    <button-counter @addnumber="addTotal"></button-counter>
+  </div>
+</body>
+<script type="text/javascript">
+  var Child  = {  
+    template : `
+      <div>
+        <div>{{message}}</div>
+        <span>{{changeName }}</span>
+      </div>
+    `,
+    data:function(){
+      return {
+        message:"this is a single component!",
+        changeName:this.name + " wu",
+      }
+    },
+    props : ['name'],
+
+  }
+  Vue.component('my-component-two',{  
+    template:`
+        <div>这是一个全局的组件</div>
+    `,
+  });
+  Vue.component('button-counter',{
+    template:`
+        <button @click="addnumber">{{counter}}</button>
+    `,
+    methods:{
+      addnumber(){
+          this.counter++;
+          this.$emit('addnumber');
+      },
+    },
+    data:function(){
+      return {
+        counter:0,
+      }
+    }
+  })
+  var vm = new Vue({
+    el : "#box",
+    data:{
+      binbin:"this is parent data",
+      total:1,
+    },
+    methods:{
+      addTotal(){
+        this.total += 1;
+      }
+    },
+    computed:{
+      
+    },
+    components:{
+      'my-component-one': Child
+    }
+  });
+
+ 
+</script>
+</html>
